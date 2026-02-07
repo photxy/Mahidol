@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You - Happy Valentine's Day</title>
+    
+    <title>Surprise!</title>
+    <meta property="og:title" content="Gift for you">
+    <meta property="og:description" content=" ">
+    <meta property="og:image" content="">
+    <meta name="description" content=" ">
+
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -20,7 +26,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Prompt', sans-serif;
-            touch-action: manipulation; /* ปรับให้เหมาะกับการทัชบนมือถือ */
+            touch-action: manipulation;
         }
 
         body {
@@ -254,14 +260,11 @@
                 }
             }
 
-            // ฟังก์ชันย้ายปุ่มหนี
             function moveNoButton(e) {
-                if (e) e.preventDefault(); // ป้องกัน Action ซ้อนทับบนมือถือ
-                
+                if (e) e.preventDefault();
                 noCount++;
 
                 if (noCount >= 5) {
-                    // ขั้นสุดท้าย: ขยายปุ่มเขียวเต็มหน้าจอแบบสวยๆ
                     yesBtn.style.position = "fixed";
                     yesBtn.style.top = "0";
                     yesBtn.style.left = "0";
@@ -270,19 +273,18 @@
                     yesBtn.style.margin = "0";
                     yesBtn.style.zIndex = "9999";
                     yesBtn.style.borderRadius = "0";
-                    yesBtn.style.fontSize = "32px"; // ขนาดกำลังดีไม่ล้นจอ
+                    yesBtn.style.fontSize = "32px";
+                    yesBtn.style.display = "flex";
                     yesBtn.innerHTML = "พร้อมแล้ว!!! ❤️";
                     noBtn.style.display = "none";
                     return;
                 }
 
-                // ขยายปุ่มเขียวทีละนิด
                 let newFontSize = 16 + (noCount * 12);
                 let newPadding = 12 + (noCount * 8);
                 yesBtn.style.fontSize = `${newFontSize}px`;
                 yesBtn.style.padding = `${newPadding}px ${newPadding * 1.2}px`;
 
-                // สุ่มตำแหน่งปุ่ม No
                 const padding = 20;
                 let maxX = window.innerWidth - noBtn.offsetWidth - padding;
                 let maxY = window.innerHeight - noBtn.offsetHeight - padding;
@@ -296,7 +298,6 @@
                     newY = Math.random() * maxY;
                     const yesRect = yesBtn.getBoundingClientRect();
                     
-                    // เช็คว่าไม่ทับปุ่มเขียว
                     if (
                         newX + noBtn.offsetWidth < yesRect.left - 30 ||
                         newX > yesRect.right + 30 ||
@@ -313,12 +314,10 @@
                 noBtn.style.top = `${newY}px`;
             }
 
-            // ใช้ทัชสตาร์ทสำหรับมือถือเพื่อให้ตอบสนองเร็วขึ้นและไม่เด้ง
             noBtn.addEventListener('touchstart', moveNoButton);
             noBtn.addEventListener('mouseover', moveNoButton);
             noBtn.addEventListener('click', (e) => e.preventDefault()); 
 
-            // ปุ่มพร้อมแล้ว
             yesBtn.addEventListener('click', () => {
                 window.location.href = destinationURL;
             });
@@ -326,4 +325,3 @@
     </script>
 </body>
 </html>
-
